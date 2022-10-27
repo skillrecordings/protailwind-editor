@@ -1,9 +1,6 @@
 import React from "react";
 import {
-  SandpackProvider,
-  SandpackPreview,
   useActiveCode,
-  SandpackLayout,
   SandpackStack,
   useSandpack,
 } from "@codesandbox/sandpack-react";
