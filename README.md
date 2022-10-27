@@ -22,8 +22,9 @@ Visit [http://localhost:3000](http://localhost:3000)
 #### Editors
 
 - Monaco
+  - https://github.com/suren-atoyan/monaco-react
 - CodeMirror 6
-- https://blog.replit.com/code-editors
+- Comparison: https://blog.replit.com/code-editors
 
 #### Tailwind
 
