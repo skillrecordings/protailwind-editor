@@ -56,7 +56,7 @@ const Notes = () => {
         </li>
         <li>
           ⚠︎ Loading a custom tailwind config (which we'll need) seems
-          problematic and I still haven't figured out how to do that.
+          problematic and I think it would only be possible with React.
         </li>
       </ul>
     </div>
