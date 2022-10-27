@@ -35,10 +35,6 @@ const Editor: React.FC<any> = ({ onChange, isPreview }) => {
         },
       });
       configureMonacoTailwindcss(monaco);
-
-      return () => {
-        console.log({ monaco });
-      };
     }
   }, [monaco]);
 
