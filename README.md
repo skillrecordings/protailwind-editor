@@ -11,6 +11,7 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 #### WebContainer
 
+- https://www.npmjs.com/package/@webcontainer/api
 - https://learn.svelte.dev/tutorial/welcome-to-svelte
   - https://github.com/sveltejs/learn.svelte.dev
 - https://astro.build/play
