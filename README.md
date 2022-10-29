@@ -35,3 +35,9 @@ Visit [http://localhost:3000](http://localhost:3000)
   - custom tailwindcss config
     - https://github.com/remcohaszing/monaco-tailwindcss/blob/main/examples/demo/src/index.ts
       - https://monaco-tailwindcss.js.org/#tailwindrc
+
+#### Web Workers
+
+- https://stackoverflow.com/questions/44118600/web-workers-how-to-import-modules
+- https://github.com/GoogleChromeLabs/import-from-worker
+- https://github.com/evanw/esbuild/issues/312#issuecomment-798880394

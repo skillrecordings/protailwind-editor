@@ -23,6 +23,18 @@ const nextConfig = {
       },
     ];
   },
+  // webpack(config, options) {
+  //   config.module.rules.push({
+  //     test: /\.worker\.js$/,
+  //     loader: "worker-loader",
+  //     options: {
+  //       inline: true,
+  //       name: "static/[hash].worker.js",
+  //       publicPath: "/_next/",
+  //     },
+  //   });
+  //   return config;
+  // },
   // swcMinify: true,
 };
 

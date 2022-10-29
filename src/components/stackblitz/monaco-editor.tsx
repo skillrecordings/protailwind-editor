@@ -14,14 +14,14 @@ const MonacoEditor: React.FC<{
 
   React.useEffect(() => {
     if (monaco) {
-      // monaco.languages.css.cssDefaults.setOptions({
-      //   data: {
-      //     dataProviders: {
-      //       tailwindcss: tailwindcssData,
-      //     },
-      //   },
-      // });
-      // configureMonacoTailwindcss(monaco);
+      monaco.languages.css.cssDefaults.setOptions({
+        data: {
+          dataProviders: {
+            tailwindcss: tailwindcssData,
+          },
+        },
+      });
+      configureMonacoTailwindcss(monaco);
       console.log("here is the monaco instance:", monaco);
     }
   }, [monaco]);
@@ -127,6 +127,14 @@ const MonacoEditor: React.FC<{
 
 export default MonacoEditor;
 
+// const workerURL = require("./tailwindcss.worker.js").WORKER_ENTRY_FILE_URL;
+// const blob = new Blob([`import "${workerURL}";`], { type: "text/javascript" });
+// const tailwindworker = new Worker(URL.createObjectURL(blob), {
+//   type: "module",
+//   credentials: "omit",
+//   name: "tailwindcss",
+// });
+
 window.MonacoEnvironment = {
   // @ts-ignore-next-line
   getWorker(moduleId, label) {
@@ -135,39 +143,21 @@ window.MonacoEnvironment = {
         return new Worker(
           new URL("monaco-editor/esm/vs/editor/editor.worker", import.meta.url)
         );
-      case "css":
-      case "less":
-      case "scss":
-        return new Worker(
-          new URL(
-            "monaco-editor/esm/vs/language/css/css.worker",
-            import.meta.url
-          )
-        );
-      case "html":
-      case "json":
-        return new Worker(
-          new URL(
-            "monaco-editor/esm/vs/language/json/json.worker",
-            import.meta.url
-          )
-        );
-      case "javascript":
-      case "typescript":
-        return new Worker(
-          new URL(
-            "monaco-editor/esm/vs/language/typescript/ts.worker",
-            import.meta.url
-          )
-        );
       case "tailwindcss":
         return new Worker(
-          new URL("monaco-tailwindcss/tailwindcss.worker", import.meta.url)
+          new URL("monaco-tailwindcss/tailwindcss.worker.js", import.meta.url),
+          {
+            // credentials: "omit",
+            type: "module",
+          }
         );
       default:
         throw new Error(`Unknown label ${label}`);
     }
   },
+  // getWorkerUrl: function (workerId, label) {
+  //   return "monaco-editor-worker-loader-proxy.js";
+  // },
 };
 
 function getWorkerURL(url: string) {

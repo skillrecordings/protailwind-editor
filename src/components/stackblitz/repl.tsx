@@ -81,10 +81,7 @@ const StackBlitzEditor: React.FC<{
           <MonacoEditor container={container} project={projectFiles} />
         )}
         {magicURL ? (
-          <iframe
-            className="w-full h-full"
-            src={`${magicURL}/tutorials/ribbon-banner/02-intro`}
-          />
+          <iframe className="w-full h-full" src={`${magicURL}`} />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <span className="animate-pulse">loading</span>
