@@ -25,7 +25,6 @@ const Editor: React.FC<any> = ({ activeFile, onChange, isPreview }) => {
   };
   const fileExtension = sandpack.activeFile.split(".").pop();
 
-  // since we are using tailwind cdn which uses tailwind.config syntax it needs to be modified
   const tailwindConfig = get(
     get(sandpack.files, "/src/tailwind.config.js"),
     "code"
