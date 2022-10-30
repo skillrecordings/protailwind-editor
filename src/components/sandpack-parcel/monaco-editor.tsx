@@ -9,16 +9,7 @@ import {
   configureMonacoTailwindcss,
   tailwindcssData,
 } from "monaco-tailwindcss";
-import {
-  attempt,
-  create,
-  get,
-  padEnd,
-  tail,
-  template,
-  toPlainObject,
-} from "lodash";
-import { Config } from "tailwindcss";
+import get from "lodash/get";
 
 const Editor: React.FC<any> = ({ activeFile, onChange, isPreview }) => {
   const { code, updateCode } = useActiveCode();
