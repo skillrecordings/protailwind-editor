@@ -17,6 +17,7 @@ const Editor: React.FC<any> = ({ activeFile, onChange, isPreview }) => {
   const [mounted, setMounted] = React.useState(false);
   const parseTailwindConfigFromCdn = (config: string) => {
     const trueConfig = config.replace("tailwind.config", "module.exports");
+    // we need to define a module because of eval below
     const module = {
       exports: {},
     };
