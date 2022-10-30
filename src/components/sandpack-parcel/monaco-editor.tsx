@@ -9,7 +9,16 @@ import {
   configureMonacoTailwindcss,
   tailwindcssData,
 } from "monaco-tailwindcss";
-import { get } from "lodash";
+import {
+  attempt,
+  create,
+  get,
+  padEnd,
+  tail,
+  template,
+  toPlainObject,
+} from "lodash";
+import { Config } from "tailwindcss";
 
 const Editor: React.FC<any> = ({ activeFile, onChange, isPreview }) => {
   const { code, updateCode } = useActiveCode();
@@ -17,13 +26,17 @@ const Editor: React.FC<any> = ({ activeFile, onChange, isPreview }) => {
   const [mounted, setMounted] = React.useState(false);
   const parseTailwindConfigFromCdn = (config: string) => {
     const trueConfig = config.replace("tailwind.config", "module.exports");
-    return trueConfig;
+    const module = {
+      exports: {},
+    };
+    return eval(trueConfig);
   };
   const fileExtension = sandpack.activeFile.split(".").pop();
 
   // since we are using tailwind cdn which uses tailwind.config syntax it needs to be modified
-  const tailwindConfig = parseTailwindConfigFromCdn(
-    get(get(sandpack.files, "/src/tailwind.config.js"), "code")
+  const tailwindConfig = get(
+    get(sandpack.files, "/src/tailwind.config.js"),
+    "code"
   );
 
   React.useEffect(() => {
@@ -51,16 +64,14 @@ const Editor: React.FC<any> = ({ activeFile, onChange, isPreview }) => {
       });
 
       const monacoTailwindcss = configureMonacoTailwindcss(monaco, {
-        tailwindConfig: eval(tailwindConfig),
+        tailwindConfig: parseTailwindConfigFromCdn(tailwindConfig),
       });
       setMonacoTailwindcss(monacoTailwindcss);
     }
   }, [monaco]);
 
   const updateTailwindConfig = (value: string) => {
-    monacoTailwindcss.setTailwindConfig(
-      eval(parseTailwindConfigFromCdn(value))
-    );
+    monacoTailwindcss.setTailwindConfig(parseTailwindConfigFromCdn(value));
   };
 
   return mounted ? (
@@ -78,6 +89,7 @@ const Editor: React.FC<any> = ({ activeFile, onChange, isPreview }) => {
           language={fileExtension === "js" ? "javascript" : fileExtension}
           theme="vs-dark"
           key={sandpack.activeFile}
+          // defaultValue={code}
           value={code}
           onChange={(value = "") => {
             updateCode(value);
